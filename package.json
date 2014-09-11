@@ -1,0 +1,15 @@
+{
+	"name":"random-image",
+	"version":"0.0.1",
+	"description": "returns the randomized list of images in a directory",
+	"repo":"jarusified/node-random_images",
+	"author":"suraj jarus",
+	"files":"index.js",
+	"keywords":[
+				'imagess',
+				'list',
+				'random',
+				'shuffle',
+				'sort',
+				'gallery']
+}
