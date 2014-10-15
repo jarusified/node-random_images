@@ -1,3 +1,6 @@
 var file = require('./index.js');
-file('/home/jarus/Pictures');
+var a=new file();
+a.where(['/home/jarus/Pictures','/home/jarus/','/home/jarus']);
+var type = a.file_type(['png','jpg']);
+a.run();
 

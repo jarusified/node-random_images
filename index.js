@@ -5,24 +5,31 @@ var path = require('path');
 
 
 var imgextension = ['png','jpg'];
-var arr=[];
+var arr = [];
 
-function random-image(){
-	if(!(this instanceof random-image)){
-		return new random-image();
+function random_image(){
+	if(!(this instanceof random_image)){
+		return new random_image();
 	}
-	this._where=[];
-	this._arr = [];
+	this._where = [];
+	this._type  = [];
+	this._arr   = [];
 }
 
-random-image.prototype.type = function(str){
+random_image.prototype.file_type = function(str){
 	if(!arguments.length){
 		this._type = str;
-		return this;
+		return this._type;
 	}
+	if(Array.isArray(str)){
+		this._type = this._type.concat(str);
+	}else{
+		this._type.push(this._type);
+	}
+	return this._type;
 }
 
-random-image.prototype.where = function(where){
+random_image.prototype.where = function(where){
 	if(!arguments.length){
 		return this._where;
 	}
@@ -31,47 +38,26 @@ random-image.prototype.where = function(where){
 	}else{
 		this._where.push(where);
 	}
-	return this;
+	return this._where;
 }
 
-random-image.prototype.run = function(cb){
+random_image.prototype.run = function(){
 	var that = this;
-	this.read(function(err,files){
-		if(err){
-			cb(err);
-			return;
-		}
-		self.stat(files)
-	})
+	for(var i=0;i<that._where.length;i++){
+		fs.readdir(that._where[i],function(err,files){
+			if(err){
+				return;
+			}
+			for(var j=0;j<files.length;j++){
+				var ext = files[j].split('.').pop();
+
+				if(ext == that._type[0]) {
+					that._arr.push(files[j]);
+				}
+			}
+			return that._arr;
+		});
+	}
 }
 
-
-/*module.exports = function(dir){
-	fs.exists(dir,function(exists){
-		if(exists){
-			fs.readdir(dir,function(error,list){
-				if(error){
-					return;
-				}
-				else{
-					for(var i=0;i<list.length;i++){
-						// extension check
-						var ext = list[i].split('.').pop();
-						if(ext=='jpg' || ext=='png')     arr.push(list[i]);
-					}
-				}
-				var rand,
-					temp,
-					len=arr.length,
-					ret = arr.slice();
-				while(len){
-					rand=Math.floor(Math.random()*len--);
-					temp=ret[len];
-					ret[len]=ret[rand];
-					ret[rand]=temp;
-				}
-				console.log(ret);
-			});
-		}
-	});
-}*/
+module.exports = random_image;
