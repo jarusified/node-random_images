@@ -1,18 +1,15 @@
 var fs   = require('fs');
-var each = require('each-async');
 var path = require('path');
 
-
-
-var imgextension = ['png','jpg'];
-var arr = [];
 
 function random_image(){
 	if(!(this instanceof random_image)){
 		return new random_image();
 	}
 	this._where = [];
-	this._type  = [];
+	this._type  = ['jpeg','jpg','gif','tif','tiff','pbm','pcd','pct','pcx','pic','pict','psd','ps','psd',
+					'pnt','psp','pict','ai','drw','eps','ps','svg','yuv','tif','thm','psd','bmp','3dm',
+					'max'];
 	this._arr   = [];
 }
 
